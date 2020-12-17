@@ -54,4 +54,4 @@ For this project, we are going to use one domain as follow to make it simpler:
 | - active: boolean    |
 +----------------------+
 
-For the front end, please refer to business-requirement-fe.
+For the front end, please refer to https://github.com/Bram-Putra/business-requirement-fe
