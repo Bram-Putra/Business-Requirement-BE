@@ -4,7 +4,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         password: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING(1000)
         },
         photoPath: {
             type: Sequelize.STRING
@@ -34,6 +34,9 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         province: {
+            type: Sequelize.STRING
+        },
+        role: {
             type: Sequelize.STRING
         },
         active: {

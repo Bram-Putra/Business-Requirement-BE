@@ -1,6 +1,7 @@
 const db = require("../models");
 const Candidate = db.candidates;
 const Op = db.Sequelize.Op;
+const hashAndSalt = require('password-hash-and-salt');
 
 // create and save a new Candidate
 exports.create = (req, res) => {
@@ -15,31 +16,40 @@ exports.create = (req, res) => {
     var condition = email ? { email: { [Op.eq]: `${email}` } } : null;
     Candidate.findAll({ where: condition }).then(data => {
         if((data == "")) {
-            // create a Candidate
-            const candidate = {
-                email: req.body.email,
-                password: req.body.password,
-                givenName: req.body.givenName,
-                familyName: req.body.familyName,
-                dob: req.body.dob,
-                height: req.body.height,
-                weight: req.body.weight,
-                address1: req.body.address1,
-                address2: req.body.address2,
-                city: req.body.city,
-                province: req.body.province,
-                active: req.body.active ? req.body.active : false
-            };
+            // hash and salt password
+            var password = req.body.password;
+            hashAndSalt(password).hash(function(error, hash) {
+                if (error) {
+                    throw new Error('Something went wrong!');
+                }
 
-            // save Candidate in the database
-            Candidate.create(candidate)
-                .then(data => {
-                    res.send(data);
-                })
-                .catch(err => {
-                    res.status(500).send({
-                        message:
-                            err.message || "Some error occurred while creating the Candidate."
+                // create a Candidate
+                const candidate = {
+                    email: req.body.email,
+                    password: hash,
+                    givenName: req.body.givenName,
+                    familyName: req.body.familyName,
+                    dob: req.body.dob,
+                    height: req.body.height,
+                    weight: req.body.weight,
+                    address1: req.body.address1,
+                    address2: req.body.address2,
+                    city: req.body.city,
+                    province: req.body.province,
+                    role: req.body.role,
+                    active: req.body.active ? req.body.active : false
+                };
+
+                // save Candidate in the database
+                Candidate.create(candidate)
+                    .then(data => {
+                        res.send(data);
+                    })
+                    .catch(err => {
+                        res.status(500).send({
+                            message:
+                                err.message || "Some error occurred while creating the Candidate."
+                        });
                     });
                 });
         } else {

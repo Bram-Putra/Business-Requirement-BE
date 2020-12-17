@@ -10,6 +10,7 @@
         "address2": "",
         "city": "Sa Dec",
         "province": "Dong Thap",
+	"role": "Administrator",
         "active": true
 },
 {
@@ -24,5 +25,6 @@
         "address2": "",
         "city": "Sa Dec",
         "province": "Dong Thap",
+    	"role": "User",
         "active": true
 }
