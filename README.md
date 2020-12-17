@@ -14,6 +14,7 @@ This back end service can accommodate business processes as follow:
 3. Once registered, end users can update their profile, e.g. upload a photo and key in some details
 
 Based on Domain-driven Design, the design is as follow:
+
 +--------------------+                          +----------------------+
 | Candidate          |                          | Profile              |
 +--------------------+                          +----------------------+
@@ -31,10 +32,58 @@ Based on Domain-driven Design, the design is as follow:
                                                 +----------------------+
 
 We define two domains, Candidate and Profile, to accommodate the future development.
-If we look at the one-to-one relationship,
-we can also move all attributes from Profile to Candidate.
+And we will not store any image file in the database.
+The "photoPath: String" will store the path to the image file.
+
+In most systems that has a User domain (or Candidate in this design), there are different roles for the User.
+For example, a User with an Administrator role will have access to features that are not
+available for a User who has the EndUser role.
+Or if we are designing a Role-playing game, there will be different roles with different stats
+for the player. To accommodate this requirement, the design should be:
+
++--------------------+                          +----------------------+
+| Candidate          |                          | Profile              |
++--------------------+                          +----------------------+
+| - id: int          |                          | - id: int            |
+| - email: String    |                          | - photoPath: String  |
+| - password: String |  1                    1  | - givenName: String  |
+| - profile: Profile |--------------------------| - familyName: String |
+| - active: boolean  |                          | - dob: date          |                          +--------------------------+
++--------------------+                          | - height: int        |                          | Role                     |
+                                                | - weight: float      |                          +--------------------------+
+                                                | - address1: String   |                          | - id: int                |
+                                                | - address2: String   |                          | - name: String           |
+                                                | - city: String       |                          | - modules: List<Module>  |
+                                                | - province: String   |  0..*                 1  | - stats: List<Stat>      |
+                                                | - role: Role         |--------------------------| - active: boolean        |
+                                                +----------------------+                          +--------------------------+
+
+Then the system will also have the Module and Stat domains.
+The design with the Role domain will not be used for this back end application. But I hope you get the idea.
+For this application, we will use String for role:
+
++--------------------+                          +----------------------+
+| Candidate          |                          | Profile              |
++--------------------+                          +----------------------+
+| - id: int          |                          | - id: int            |
+| - email: String    |                          | - photoPath: String  |
+| - password: String |  1                    1  | - givenName: String  |
+| - profile: Profile |--------------------------| - familyName: String |
+| - active: boolean  |                          | - dob: date          |
++--------------------+                          | - height: int        |
+                                                | - weight: float      |
+                                                | - address1: String   |
+                                                | - address2: String   |
+                                                | - city: String       |
+                                                | - province: String   |
+                                                | - role: String       |
+                                                +----------------------+
+
+If we look at the one-to-one relationship between Profile and Candidate,
+we can move all attributes from Profile to Candidate.
 Therefore, we can omit the Profile domain.
 For this project, we are going to use one domain as follow to make it simpler:
+
 +----------------------+
 | Candidate            |
 +----------------------+
@@ -51,6 +100,7 @@ For this project, we are going to use one domain as follow to make it simpler:
 | - address2: String   |
 | - city: String       |
 | - province: String   |
+| - role: String       |
 | - active: boolean    |
 +----------------------+
 
