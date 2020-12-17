@@ -1,3 +1,5 @@
+(better viewed as raw text)
+
 business-requirement-be
 
 I started working on this project during my time undergoing a mandatory quarantine in Vietnam.
@@ -52,4 +54,44 @@ For this project, we are going to use one domain as follow to make it simpler:
 | - active: boolean    |
 +----------------------+
 
-The front end is business-requirement-fe.
+These are the APIs
+Methods     Urls                   Actions
+GET         api/candidates         get all Candidates
+GET         api/candidates/:id     get Candidate by id
+POST        api/candidates         add new Candidate
+PUT         api/candidates/:id     update Candidate by id
+DELETE      api/candidates/:id     remove Candidate by id
+
+There are two options for DELETE (api/candidates/:id), namely soft delete and hard delete.
+The soft delete will only change the value of attribute active to false.
+While the hard delete will remove a record from the database.
+
+To run this back end application, do the following:
+ 1. Install MySQL on your local machine.
+ 2. Run MySQL and use your root account.
+ 3. Create a user as follow:
+    - username: resta_user
+    - password: resu_atser
+ 4. Create a database as follow:
+    - databasename: resta
+ 5. Grant all privileges on resta to resta_user.
+ 6. Quit MySQL.
+ 7. Install Node.js on your local machine.
+ 8. Clone this project.
+ 9. To create the database automatically:
+    - open server.js in this project's root directory
+    - uncomment lines 19-21
+    - comment line 22
+    - save the file
+    - Sequelize will create the database and a Table according to the Model when we run the app
+10. Run server.js
+11. After the database has been created:
+    - stop the app
+    - open server.js in this project's root directory
+    - comment lines 19-21
+    - uncomment line 22
+    - save the file
+12. Re-run server.js
+13. The back end service will run on your local machine with port number 8080
+
+For the front end, please refer to https://github.com/Bram-Putra/business-requirement-fe
