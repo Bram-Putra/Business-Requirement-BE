@@ -115,7 +115,7 @@ exports.delete = (req, res) => {
     // TODO:
     // for SOFT delete, comment rows 125-143
     // and uncomment rows 101-123
-    // for hard delete, comment rows 95-97 and 101-119
+    // for HARD delete, comment rows 95-97 and 101-119
     // and uncomment rows 125-143
 
     req.body = {
