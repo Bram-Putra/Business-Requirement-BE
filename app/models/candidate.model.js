@@ -6,6 +6,9 @@ module.exports = (sequelize, Sequelize) => {
         password: {
             type: Sequelize.STRING
         },
+        photoPath: {
+            type: Sequelize.STRING
+        },
         givenName: {
             type: Sequelize.STRING
         },

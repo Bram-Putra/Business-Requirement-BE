@@ -11,9 +11,9 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 const db = require("./app/models");
-// TODO: to create the database on the first run,
+// TODO: to create the table on the first run,
 // uncomment rows 19-21 and comment row 22.
-// After creating the database, uncomment row 22,
+// After creating the table, uncomment row 22,
 // and comment rows 19-21.
 
 // db.sequelize.sync({ force: true }).then(() => {
