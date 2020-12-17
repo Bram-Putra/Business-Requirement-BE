@@ -11,33 +11,44 @@ exports.create = (req, res) => {
         return;
     }
 
-    // create a Candidate
-    const candidate = {
-        email: req.body.email,
-        password: req.body.password,
-        givenName: req.body.givenName,
-        familyName: req.body.familyName,
-        dob: req.body.dob,
-        height: req.body.height,
-        weight: req.body.weight,
-        address1: req.body.address1,
-        address2: req.body.address2,
-        city: req.body.city,
-        province: req.body.province,
-        active: req.body.active ? req.body.active : false
-    };
+    const email = req.body.email;
+    var condition = email ? { email: { [Op.eq]: `${email}` } } : null;
+    Candidate.findAll({ where: condition }).then(data => {
+        if((data == "")) {
+            // create a Candidate
+            const candidate = {
+                email: req.body.email,
+                password: req.body.password,
+                givenName: req.body.givenName,
+                familyName: req.body.familyName,
+                dob: req.body.dob,
+                height: req.body.height,
+                weight: req.body.weight,
+                address1: req.body.address1,
+                address2: req.body.address2,
+                city: req.body.city,
+                province: req.body.province,
+                active: req.body.active ? req.body.active : false
+            };
 
-    // save Candidate in the database
-    Candidate.create(candidate)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
+            // save Candidate in the database
+            Candidate.create(candidate)
+                .then(data => {
+                    res.send(data);
+                })
+                .catch(err => {
+                    res.status(500).send({
+                        message:
+                            err.message || "Some error occurred while creating the Candidate."
+                    });
+                });
+        } else {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Candidate."
+                    "Email is already registered."
             });
-        });
+        }
+    });
 };
 
 // retrieve all Candidates from the database

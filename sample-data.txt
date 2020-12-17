@@ -1,0 +1,28 @@
+{
+        "email": "person1@gmail.com",
+        "password": "123456789",
+        "givenName": "Brad",
+        "familyName": "Pitt",
+        "dob": "1963-12-18T00:00:00.000Z",
+        "height": 180,
+        "weight": 72,
+        "address1": "662 ap Phu Long",
+        "address2": "",
+        "city": "Sa Dec",
+        "province": "Dong Thap",
+        "active": true
+},
+{
+        "email": "person2@gmail.com",
+        "password": "987654321",
+        "givenName": "Tom",
+        "familyName": "Cruise",
+        "dob": "1962-07-03T00:00:00.000Z",
+        "height": 170,
+        "weight": 77,
+        "address1": "661 ap Phu Long",
+        "address2": "",
+        "city": "Sa Dec",
+        "province": "Dong Thap",
+        "active": true
+}
