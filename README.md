@@ -78,14 +78,14 @@ To run this back end application, do the following:
  6. Quit MySQL.
  7. Install Node.js on your local machine.
  8. Clone this project.
- 9. To create the database automatically:
+ 9. To create the table automatically:
     - open server.js in this project's root directory
     - uncomment lines 19-21
     - comment line 22
     - save the file
-    - Sequelize will create the database and a Table according to the Model when we run the app
+    - Sequelize will create a table according to the Model when we run the app
 10. Run server.js
-11. After the database has been created:
+11. After the table has been created:
     - stop the app
     - open server.js in this project's root directory
     - comment lines 19-21
