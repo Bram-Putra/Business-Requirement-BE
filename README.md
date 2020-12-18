@@ -9,8 +9,7 @@ This back end service can accommodate business processes as follow:
 2. The express-validator is used to build a middleware to do some validations, i.e.:
    - The email address must be valid
    - Must be non-duplicated email address
-   - Password must be 6-10 characters
-   note: we can add more validations as needed.
+   note: we can add more validations as needed, such as password must be at least 6 characters, etc.
 3. Once registered, end users can update their profile, e.g. upload a photo and key in some details
 
 Based on Domain-driven Design, the design is as follow:
