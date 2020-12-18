@@ -19,6 +19,9 @@ module.exports = app => {
     // Update a Candidate with id
     router.put("/:id", validateCandidate, candidate.update);
   
+    // Update a Candidate with id
+    router.put("/login/auth/", validateCandidate, candidate.login);
+  
     // Delete a Candidate with id
     router.delete("/:id", candidate.delete);
   

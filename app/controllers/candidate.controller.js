@@ -123,10 +123,10 @@ exports.delete = (req, res) => {
     const id = req.params.id;
 
     // TODO:
-    // for SOFT delete, comment rows 125-143
-    // and uncomment rows 101-123
-    // for HARD delete, comment rows 95-97 and 101-119
-    // and uncomment rows 125-143
+    // for SOFT delete, comment rows 155-173
+    // and uncomment rows 131-153
+    // for HARD delete, comment rows 131-153
+    // and uncomment rows 155-173
 
     req.body = {
         active: false
@@ -200,6 +200,34 @@ exports.findAllActive = (req, res) => {
             res.status(500).send({
                 message:
                 err.message || "Some error occurred while retrieving candidates."
+            });
+        });
+};
+
+// update a Candidate by the id in the request
+exports.login = (req, res) => {
+    var email = req.body.email;
+    var password = req.body.password;
+
+    var condition = email ? { email: { [Op.like]: `%${email}%` } } : null;
+    Candidate.findOne({ where: condition })
+        .then(data => {
+            hashAndSalt(password).verifyAgainst(data.password, function(error, verified) {
+                if(error) {
+                    throw new Error('Something went wrong!');
+                }
+                    
+                if(!verified) {
+                    res.send(null);
+                } else {
+                    res.send(data);
+                }
+            });
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                "Email is not registered."
             });
         });
 };
