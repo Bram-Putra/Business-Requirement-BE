@@ -2,6 +2,10 @@ const db = require("../models");
 const Candidate = db.candidates;
 const Op = db.Sequelize.Op;
 const hashAndSalt = require('password-hash-and-salt');
+const path = require('path');
+
+var formidable = require('formidable');
+var mv = require('mv');
 
 // create and save a new Candidate
 exports.create = (req, res) => {
@@ -27,6 +31,7 @@ exports.create = (req, res) => {
                 const candidate = {
                     email: req.body.email,
                     password: hash,
+                    photoPath: 'uploads/profile.png',
                     givenName: req.body.givenName,
                     familyName: req.body.familyName,
                     dob: req.body.dob,
@@ -173,23 +178,6 @@ exports.delete = (req, res) => {
     //     });
 };
 
-// delete all Candidates from the database
-exports.deleteAll = (req, res) => {
-    Candidate.destroy({
-            where: {},
-            truncate: false
-        })
-        .then(nums => {
-            res.send({ message: `${nums} Candidates were deleted successfully!` });
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                err.message || "Some error occurred while removing all Candidates."
-            });
-        });
-};
-
 // find all active Candidates
 exports.findAllActive = (req, res) => {
     Candidate.findAll({ where: { active: true } })
@@ -229,5 +217,40 @@ exports.login = (req, res) => {
                 message:
                 "Email is not registered."
             });
+        });
+};
+
+// to record the path to the profile photo
+exports.upload = (req, res) => {
+    var candidate = { photoPath: req.file.path };
+    const id = req.params.id;
+    Candidate.update(candidate, {
+            where: { id: id }
+        })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                message: "Photo has been stored."
+                });
+            } else {
+                res.send({
+                message: `Cannot store the photo of Candidate with id=${id}.`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error storing the photo Candidate with id=" + id
+            });
+        });
+};
+
+// to send profile photo to the front end
+exports.getProfilePhoto = (req, res) => {
+    const id = req.params.id;
+    Candidate.findByPk(id)
+        .then(data => {
+            var photoPath = path.join(__dirname, '../../'+data.dataValues.photoPath);
+            res.sendFile(photoPath);
         });
 };

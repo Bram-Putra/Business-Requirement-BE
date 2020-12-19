@@ -4,6 +4,8 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         password: {
+            // hash-and-salted password will be 270 chars long
+            // and this data type can store up to 1000 characters
             type: Sequelize.STRING(1000)
         },
         photoPath: {
