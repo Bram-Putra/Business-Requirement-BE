@@ -149,6 +149,11 @@ To run this back end application, do the following:
     - save the file
 12. Re-run server.js.
 13. The back end service will run on your local machine with port number 8080.
-14. Cors origin will be "http://localhost:8081", thus, run the front end accordingly. 
+14. Cors origin will be "http://localhost:8081", thus, run the front end accordingly.
+15. A Dockerfile is provided for building the Docker image.
+16. There might be machines that cannot run the back end service
+    with the localhost IP address (127.0.0.1). If you need to change the IP address
+    of the back end service, you can do it in the db.config.js file.
+    (/app/config/db.config.js)
 
 For the front end, please refer to https://github.com/Bram-Putra/business-requirement-fe
