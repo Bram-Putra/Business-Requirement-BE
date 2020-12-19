@@ -33,9 +33,15 @@ module.exports = app => {
   
     // Create a new Candidate
     router.post("/", validateCandidate, candidate.create);
+  
+    // Update a Candidate with id
+    router.put("/:id", validateCandidate, candidate.update);
 
     // Upload Photo
     router.put("/upload/:id", upload.single('candidatePhoto'), candidate.upload);
+  
+    // Update a Candidate with id
+    router.put("/login/auth/", validateCandidate, candidate.login);
   
     // Retrieve all Candidates
     router.get("/", candidate.findAll);
@@ -45,18 +51,12 @@ module.exports = app => {
   
     // Retrieve a single Candidate with id
     router.get("/:id", candidate.findOne);
-  
-    // Update a Candidate with id
-    router.put("/:id", validateCandidate, candidate.update);
-  
-    // Update a Candidate with id
-    router.put("/login/auth/", validateCandidate, candidate.login);
-  
-    // Delete a Candidate with id
-    router.delete("/:id", candidate.delete);
 
     // Get the profile photo of Candidate with id
     router.get("/profile/photo/:id", candidate.getProfilePhoto);
+  
+    // Delete a Candidate with id
+    router.delete("/:id", candidate.delete);
   
     app.use('/api/candidates', router);
   };
