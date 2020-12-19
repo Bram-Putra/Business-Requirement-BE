@@ -104,16 +104,23 @@ For this project, we are going to use one domain as follow to make it simpler:
 +----------------------+
 
 These are the APIs
-Methods     Urls                   Actions
-GET         api/candidates         get all Candidates
-GET         api/candidates/:id     get Candidate by id
-POST        api/candidates         add new Candidate
-PUT         api/candidates/:id     update Candidate by id
-DELETE      api/candidates/:id     remove Candidate by id
+Methods     Urls                                  Actions
+POST        api/candidates                        add new Candidate
+PUT         api/candidates/:id                    update Candidate by id
+PUT         api/candidates/upload/:id             upload an image file by Candidate id
+PUT         api/candidates/login/auth/            for login authentication
+GET         api/candidates                        get all Candidates
+GET         api/candidates/active                 get all Candidates where active = true
+GET         api/candidates/:id                    get Candidate by id
+GET         api/candidates/profile/photo/:id      get the image file of a Candidate by id
+DELETE      api/candidates/:id                    remove Candidate by id
 
 There are two options for DELETE (api/candidates/:id), namely soft delete and hard delete.
 The soft delete will only change the value of attribute active to false.
 While the hard delete will remove a record from the database.
+
+This project has a directory named "uploads" to store image files uploaded by end users.
+A module called multer is used to handle the upload and save of the image files.
 
 To run this back end application, do the following:
  1. Install MySQL on your local machine.
