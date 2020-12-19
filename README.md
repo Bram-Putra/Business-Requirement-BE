@@ -104,16 +104,23 @@ For this project, we are going to use one domain as follow to make it simpler:
 +----------------------+
 
 These are the APIs
-Methods     Urls                   Actions
-GET         api/candidates         get all Candidates
-GET         api/candidates/:id     get Candidate by id
-POST        api/candidates         add new Candidate
-PUT         api/candidates/:id     update Candidate by id
-DELETE      api/candidates/:id     remove Candidate by id
+Methods     Urls                                  Actions
+POST        api/candidates                        add new Candidate
+PUT         api/candidates/:id                    update Candidate by id
+PUT         api/candidates/upload/:id             upload an image file by Candidate id
+PUT         api/candidates/login/auth/            for login authentication
+GET         api/candidates                        get all Candidates
+GET         api/candidates/active                 get all Candidates where active = true
+GET         api/candidates/:id                    get Candidate by id
+GET         api/candidates/profile/photo/:id      get the image file of a Candidate by id
+DELETE      api/candidates/:id                    remove Candidate by id
 
 There are two options for DELETE (api/candidates/:id), namely soft delete and hard delete.
 The soft delete will only change the value of attribute active to false.
 While the hard delete will remove a record from the database.
+
+This project has a directory named "uploads" to store image files uploaded by end users.
+A module called multer is used to handle the upload and save of the image files.
 
 To run this back end application, do the following:
  1. Install MySQL on your local machine.
@@ -142,6 +149,11 @@ To run this back end application, do the following:
     - save the file
 12. Re-run server.js.
 13. The back end service will run on your local machine with port number 8080.
-14. Cors origin will be "http://localhost:8081", thus, run the front end accordingly. 
+14. Cors origin will be "http://localhost:8081", thus, run the front end accordingly.
+15. A Dockerfile is provided for building the Docker image.
+16. There might be machines that cannot run the back end service
+    with the localhost IP address (127.0.0.1). If you need to change the IP address
+    of the back end service, you can do it in the db.config.js file.
+    (/app/config/db.config.js)
 
 For the front end, please refer to https://github.com/Bram-Putra/business-requirement-fe
