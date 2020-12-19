@@ -4,9 +4,6 @@ const Op = db.Sequelize.Op;
 const hashAndSalt = require('password-hash-and-salt');
 const path = require('path');
 
-var formidable = require('formidable');
-var mv = require('mv');
-
 // create and save a new Candidate
 exports.create = (req, res) => {
     if (!req.body.email) {
@@ -128,10 +125,10 @@ exports.delete = (req, res) => {
     const id = req.params.id;
 
     // TODO:
-    // for SOFT delete, comment rows 155-173
-    // and uncomment rows 131-153
-    // for HARD delete, comment rows 131-153
-    // and uncomment rows 155-173
+    // for SOFT delete, comment rows 157-175
+    // and uncomment rows 133-155
+    // for HARD delete, comment rows 133-155
+    // and uncomment rows 157-175
 
     req.body = {
         active: false
