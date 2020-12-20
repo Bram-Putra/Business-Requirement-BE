@@ -33,7 +33,7 @@ We define two domains, Candidate and Profile, to accommodate the future developm
 And we will not store any image file in the database.
 The "photoPath: String" will store the path to the image file.
 
-In most systems that has a User domain (or Candidate in this design), there are different roles for the User.
+In most systems that have a User domain (or Candidate in this design), there are different roles for the User.
 For example, a User with an Administrator role will have access to features that are not
 available for a User who has the EndUser role.
 Or if we are designing a Role-playing game, there will be different roles with different stats
